@@ -28,21 +28,22 @@
 |---|---|
 | Framework | Next.js 16.2.6 (App Router) |
 | React | 19.2.4 |
-| Build Output | Static Export (`output: 'export'`) |
+| Build Output | Vercel (server-rendered, tanpa static export) |
 | Styling | Tailwind CSS v4 |
 | Component Library | Shadcn/ui (base-ui based) |
 | Animasi | Framer Motion 12.x |
 | Font | Plus Jakarta Sans (Google Fonts via `next/font`) |
 | Package Manager | npm |
 | Bahasa Website | Full Bahasa Indonesia |
-| Status | ✅ Implementasi selesai — perlu testing visual di browser |
+| Deployment | Vercel (GitHub: grande-course/grandepos) |
+| Status | ✅ Deployed ke Vercel |
 
 ---
 
 ## 4. Design Decisions
 
 ### 4.1 Color Scheme — Hybrid
-- **Dark sections:** Hero dan CTA section menggunakan background gelap (dark navy/charcoal)
+- **Dark sections:** Hero section menggunakan background gelap (dark navy/charcoal)
 - **Light sections:** About, Fitur, FAQ, Kontak menggunakan background putih/light
 - **Aksen:** Gold dari logo (`#b88133` → `#fadb8d`) untuk tombol, highlight, dan elemen penting
 - **Brand colors dari logo:**
@@ -75,8 +76,8 @@
 ## 5. Struktur Section
 
 ### 5.1 Header / Navbar
-- Logo brand (`brand-logo.png` atau `logo.svg`)
-- Menu navigasi: Beranda, Tentang, Fitur, FAQ, Kontak
+- Logo brand (`grande-white.png`)
+- Menu navigasi: Beranda, Tentang, Fitur, FAQ, Kontak (tanpa tombol CTA)
 - Responsive: hamburger menu di mobile/tablet
 
 ### 5.2 Hero Section
@@ -118,7 +119,19 @@
 - Ikon/gambar: `ewallet.png`
 - Deskripsi: Aktifkan pembayaran digital untuk pelanggan. Unggah dokumen, hubungkan rekening bank, dan gunakan e-wallet saat transaksi di kasir.
 
-### 5.5 FAQ Section
+### 5.5 Cara Kerja Section (How It Works)
+**Judul:** "Mulai dalam 3 Langkah Mudah"
+
+**Langkah 1 — Daftar Akun**
+- Hubungi melalui WhatsApp untuk mendaftar dan dapatkan akses percobaan gratis 14 hari.
+
+**Langkah 2 — Setup Toko**
+- Atur produk, harga, dan tipe penjualan melalui Grande Backoffice.
+
+**Langkah 3 — Mulai Transaksi**
+- Gunakan Grande POS untuk melayani pelanggan. Terima pembayaran tunai maupun e-wallet.
+
+### 5.6 FAQ Section
 **Judul:** "Pertanyaan yang Sering Diajukan"
 
 **Q1:** Apa itu Grande POS?
@@ -129,12 +142,6 @@
 
 **Q3:** Apakah Grande POS memiliki produk pendukung?
 **A3:** Tentu, saat ini kami menyediakan Grande Backoffice sebagai alat manajemen lengkap untuk kelola outlet, produk, operasional POS, promosi, ewallet, pelanggan, karyawan, dan lisensi perangkat. Anda juga dapat menganalisa aktifitas bisnis anda melalui fitur laporan.
-
-### 5.6 CTA Section
-- Background gelap (dark)
-- Headline: "Siap Mengembangkan Bisnis Anda?"
-- Sub-text: "Coba Grande POS gratis selama 14 hari. Tanpa kartu kredit, tanpa komitmen."
-- Tombol: "Coba Gratis 14 Hari" → WhatsApp
 
 ### 5.7 Kontak + Footer
 **Informasi kontak:**
