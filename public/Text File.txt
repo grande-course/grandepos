@@ -1,0 +1,45 @@
+Header
+menu
+ - logo brand
+ - home
+ - about
+ - fitur
+ - faq
+ - kontak
+ -
+
+Section Solusi Aplikasi Kasir Serba Bisa
+
+Jadikan kami bagian dalam perjalananmu!
+Fitur Unggulan Grande POS
+
+
+☑️    Tersedia beragam fitur lengkap
+☑️    Performa handal dan ringan
+☑️    Sinkronisasi data realtime
+☑️    Keamanan data yang terjamin
+☑️    Percobaan gratis selama 14 hari
+
+
+Fitur Unggulan Grande POS
+- Manajemen Harga dan Tipe Penjualan
+Kami menyediakan fitur pengelolaan harga produk, beserta fitur untuk mengelola tipe penjualan, sehingga Anda dapat mengatur biaya pajak dan level harga yang Anda gunakan pada sistem POS.
+- Kelola Paket Produk
+Buat paket bundling dengan harga khusus, atur komponen produk, dan kelola status aktif langsung dari Grande Backoffice.
+- Aktivasi E-Wallet
+Aktifkan pembayaran digital untuk pelanggan. Unggah dokumen, hubungkan rekening bank, dan gunakan e-wallet saat transaksi di kasir.
+
+Faq
+Apa itu Grande POS?
+Grande POS adalah sistem POS yang dirancang untuk berbagai usaha, kami menawarkan sistem POS dengan beragam fitur yang mudah digunakan. Keunggulan sistem POS kami salah satunya adalah bisa diakses secara online dan offline.
+Perangkat seperti apa yang perlu dipersiapkan untuk menggunakan Grande POS?
+Anda dapat menggunakan Grande POS melalui perangkat seperti komputer, laptop, maupun tablet.
+Apakah Grande POS memiliki produk pendukung?
+Tentu, saat ini kami menyediakan Grande Backoffice sebagai alat manajemen lengkap untuk kelola outlet, produk, operasional POS, promosi, ewallet, pelanggan, karyawan, dan lisensi perangkat. Anda juga dapat menganalisa aktifitas bisnis anda melalui fitur laporan.
+
+Hubungi Kami
+Email: cs@grandepos.io
+Phone: +62 812 3015 775
+Address: PT Panca Logam Tirta Jaya
+Darmo Bavarian C11, Surabaya
+#GrandePosBisa!
