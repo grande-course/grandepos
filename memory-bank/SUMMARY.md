@@ -2,7 +2,7 @@
 
 Ringkasan hasil sesi tanya jawab untuk pembangunan website landing page Grande POS.
 
-**Status: ✅ Deployed ke Vercel** — GitHub repo: `grande-course/grandepos`
+**Status: ✅ Deployed ke Vercel** — GitHub repo: `grande-course/grandepos` (perlu set public untuk Hobby plan)
 
 ---
 
@@ -17,8 +17,9 @@ Ringkasan hasil sesi tanya jawab untuk pembangunan website landing page Grande P
 | 5 | Animasi | Moderate — Framer Motion (scroll-triggered, hover, transitions) | |
 | 6 | Navbar | Hide on scroll down, show on scroll up. Transparent → solid. Hamburger di mobile | Tanpa tombol CTA |
 | 7 | Hero Layout | Split — teks + CTA kiri, mockup kanan, hero-bg.jpg + dark overlay | Background statis (parallax dicoba tapi dibatalkan) |
-| 8 | CTA Utama | "Coba Gratis 14 Hari" → WhatsApp (hanya di hero). "Hubungi Kami" → scroll kontak | |
+| 8 | CTA Utama | "Subscribe" → Xendit Invoice (Rp 100.000). "Hubungi Kami" → scroll kontak | |
 | 9 | WhatsApp Float | Floating button pojok kanan bawah, muncul setelah scroll | |
+| 10 | Payment | Xendit Invoice — Rp 100.000/bulan, "Langganan Grande POS - 1 Bulan" | |
 
 ## Keputusan Teknis
 
@@ -26,9 +27,10 @@ Ringkasan hasil sesi tanya jawab untuk pembangunan website landing page Grande P
 |---|---|---|---|
 | 10 | Framework | Next.js 16.2.6 (App Router) | |
 | 11 | Styling | Tailwind CSS v4 + Shadcn/ui (base-ui) | |
-| 12 | Deployment | Vercel (auto-deploy dari GitHub) | Static export dihapus untuk Vercel |
+| 12 | Deployment | Vercel (auto-deploy dari GitHub) | Static export dihapus untuk Vercel. Repo harus public (Hobby plan) |
 | 13 | Package Manager | npm | |
 | 14 | FAQ Accordion | Custom Framer Motion (bukan Shadcn Accordion) | Base-ui accordion animasi bermasalah |
+| 15 | Payment Gateway | Xendit — API route server-side, secret key di Vercel env vars | Development mode |
 
 ## Informasi Kontak (untuk website)
 
@@ -51,13 +53,15 @@ src/
 │   ├── section-wrapper.tsx     — Wrapper animasi scroll-triggered
 │   ├── whatsapp-float.tsx      — Floating WhatsApp button
 │   ├── sections/
-│   │   ├── hero.tsx            — Hero split layout
+│   │   ├── hero.tsx            — Hero split layout + Subscribe (Xendit) button
 │   │   ├── about.tsx           — About + 4 keunggulan cards
 │   │   ├── how-it-works.tsx    — 3 langkah cara kerja
 │   │   ├── features.tsx        — 3 fitur cards dengan gambar
 │   │   ├── faq.tsx             — Custom accordion FAQ (Framer Motion)
 │   │   └── contact.tsx         — Kontak cards
 │   └── ui/                     — Shadcn/ui components (button, accordion)
+├── app/api/
+│   └── xendit/invoice/route.ts — API route create Xendit invoice
 ├── lib/
 │   └── utils.ts                — cn() utility
 ```

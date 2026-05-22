@@ -68,7 +68,7 @@
 ### 4.5 Hero Section
 - **Layout:** Split — teks + CTA di kiri, mockup POS (`SG - Grande POS.svg`) di kanan
 - **Background:** `hero-bg.jpg` dengan dark overlay
-- **CTA Primary:** "Coba Gratis 14 Hari" → link ke WhatsApp
+- **CTA Primary:** "Subscribe" → Xendit Invoice (Rp 100.000 — Langganan Grande POS 1 Bulan)
 - **CTA Secondary:** "Hubungi Kami" → smooth scroll ke section kontak
 
 ---
@@ -92,7 +92,7 @@
 - Percobaan gratis selama 14 hari
 
 **Tombol:**
-- Primary: "Coba Gratis 14 Hari" → WhatsApp (+62 812 3015 775)
+- Primary: "Subscribe" → Xendit Invoice (Rp 100.000, durasi 24 jam)
 - Secondary: "Hubungi Kami" → scroll ke section kontak
 
 **Visual:** Mockup POS di sebelah kanan (`SG - Grande POS.svg`)
@@ -202,6 +202,7 @@ Semua section harus responsive dan user-friendly di ketiga ukuran device.
 
 ## 8. Non-Goals (Tidak termasuk saat ini)
 
+- Xendit webhook untuk konfirmasi pembayaran otomatis
 - Halaman pricing/harga
 - Section testimonial
 - Multi-bahasa (English)

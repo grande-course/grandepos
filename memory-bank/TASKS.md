@@ -22,7 +22,7 @@
 
 ## Phase 3: Implementasi Section ✅
 
-- [x] **3.1** **Hero Section** (`src/components/sections/hero.tsx`) — split layout, teks + CTA kiri, mockup kanan, background hero-bg.jpg + dark overlay, checklist keunggulan
+- [x] **3.1** **Hero Section** (`src/components/sections/hero.tsx`) — split layout, teks kiri (Subscribe + Hubungi Kami), mockup kanan, background hero-bg.jpg + dark overlay, checklist keunggulan
 - [x] **3.2** **About Section** (`src/components/sections/about.tsx`) — deskripsi Grande POS, ilustrasi benefits.png, 4 keunggulan cards, light background
 - [x] **3.3** **Cara Kerja Section** (`src/components/sections/how-it-works.tsx`) — 3 langkah (Daftar → Setup → Transaksi), connector line, light background
 - [x] **3.4** **Fitur Unggulan Section** (`src/components/sections/features.tsx`) — 3 card fitur dengan gambar, judul, deskripsi, hover effects, light background
@@ -34,7 +34,7 @@
 
 - [x] **4.1** Susun semua section di `app/page.tsx` (Navbar → Hero → About → Cara Kerja → Fitur → FAQ → Kontak → Footer + WhatsApp Float)
 - [x] **4.2** Implementasi smooth scroll navigasi antar section (dengan header offset 80px)
-- [x] **4.3** Pasang link WhatsApp pada tombol CTA hero + floating button (`https://wa.me/6281230155775`)
+- [x] **4.3** Pasang link WhatsApp pada tombol "Hubungi Kami" hero + floating button (`https://wa.me/6281230155775`)
 
 ## Phase 5: Responsive & Polish ✅
 
@@ -48,8 +48,15 @@
 
 - [x] **6.1** Meta tags & SEO (title, description, keywords, Open Graph, favicon)
 - [x] **6.2** Push ke GitHub (`grande-course/grandepos`)
-- [x] **6.3** Deploy ke Vercel
+- [x] **6.3** Deploy ke Vercel — env var `XENDIT_SECRET_KEY` tersimpan di Vercel
 - [ ] **6.4** Performance check (Lighthouse) — belum dilakukan
+
+## Phase 7: Xendit Payment Integration ✅
+
+- [x] **7.1** Buat API route `/api/xendit/invoice` (`src/app/api/xendit/invoice/route.ts`) — create Xendit invoice via server-side
+- [x] **7.2** Update tombol "Subscribe" di hero → memanggil API route, buka halaman pembayaran Xendit di tab baru
+- [x] **7.3** Loading state dengan spinner saat invoice sedang dibuat
+- [x] **7.4** Konfigurasi: Rp 100.000, deskripsi "Langganan Grande POS - 1 Bulan", durasi 24 jam
 
 ## Catatan Teknis
 
@@ -57,4 +64,6 @@
 - Shadcn/ui menggunakan `@base-ui/react` (bukan Radix)
 - FAQ menggunakan custom accordion (Framer Motion) karena base-ui accordion animasi tidak berfungsi
 - Deploy di Vercel (tanpa static export) — auto-deploy dari GitHub
-- GitHub repo: https://github.com/grande-course/grandepos
+- GitHub repo: https://github.com/grande-course/grandepos (perlu di-set public untuk Vercel Hobby plan)
+- Xendit: development mode, secret key tersimpan di Vercel Environment Variables
+- `.env.local` untuk development lokal (di-gitignore)
