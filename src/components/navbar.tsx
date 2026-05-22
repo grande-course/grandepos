@@ -116,14 +116,6 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="https://wa.me/6281230155775"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-gold-dark hover:shadow-lg"
-            >
-              Coba Gratis 14 Hari
-            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -161,14 +153,6 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <a
-                href="https://wa.me/6281230155775"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 block rounded-lg bg-gold px-4 py-3 text-center text-base font-semibold text-white transition-all hover:bg-gold-dark active:bg-gold-dark"
-              >
-                Coba Gratis 14 Hari
-              </a>
             </div>
           </motion.nav>
         )}

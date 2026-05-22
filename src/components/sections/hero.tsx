@@ -85,7 +85,7 @@ export default function HeroSection() {
                 whileTap={{ scale: 0.97 }}
                 className="rounded-lg bg-gold px-6 py-3 text-sm font-bold text-white shadow-lg shadow-gold/25 transition-colors hover:bg-gold-dark sm:px-8 sm:py-3.5 sm:text-base"
               >
-                Coba Gratis 14 Hari
+                Subscribe
               </motion.a>
               <motion.a
                 href="#kontak"
