@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import SubscribeModal from "@/components/subscribe-modal";
 
 const highlights = [
   "Tersedia beragam fitur lengkap",
@@ -14,25 +15,7 @@ const highlights = [
 ];
 
 export default function HeroSection() {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubscribe = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch("/api/xendit/invoice", { method: "POST" });
-      const data = await res.json();
-
-      if (data.invoice_url) {
-        window.open(data.invoice_url, "_blank");
-      } else {
-        alert("Gagal membuat invoice. Silakan coba lagi.");
-      }
-    } catch {
-      alert("Terjadi kesalahan. Silakan coba lagi.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section
@@ -99,14 +82,12 @@ export default function HeroSection() {
             {/* CTAs */}
             <div className="mt-8 flex flex-wrap gap-4">
               <motion.button
-                onClick={handleSubscribe}
-                disabled={isLoading}
-                whileHover={isLoading ? {} : { scale: 1.03 }}
-                whileTap={isLoading ? {} : { scale: 0.97 }}
-                className="flex items-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-bold text-white shadow-lg shadow-gold/25 transition-colors hover:bg-gold-dark disabled:opacity-70 disabled:cursor-not-allowed sm:px-8 sm:py-3.5 sm:text-base"
+                onClick={() => setIsModalOpen(true)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="rounded-lg bg-gold px-6 py-3 text-sm font-bold text-white shadow-lg shadow-gold/25 transition-colors hover:bg-gold-dark sm:px-8 sm:py-3.5 sm:text-base"
               >
-                {isLoading && <Loader2 size={18} className="animate-spin" />}
-                {isLoading ? "Memproses..." : "Subscribe"}
+                Subscribe
               </motion.button>
               <motion.a
                 href="#kontak"
@@ -146,6 +127,12 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* Subscribe Modal */}
+      <SubscribeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }
