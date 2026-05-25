@@ -2,15 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, AlertTriangle, Loader2 } from "lucide-react";
+import { X, AlertTriangle, Loader2, CheckCircle } from "lucide-react";
 
 interface SubscribeModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+type Step = "disclaimer" | "invoice" | "success";
+
 export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps) {
-  const [step, setStep] = useState<"disclaimer" | "invoice">("disclaimer");
+  const [step, setStep] = useState<Step>("disclaimer");
   const [isLoading, setIsLoading] = useState(false);
   const [invoiceUrl, setInvoiceUrl] = useState<string | null>(null);
 
@@ -85,7 +87,9 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
             {/* Header */}
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
               <h2 className="text-lg font-semibold text-gray-900">
-                {step === "disclaimer" ? "Informasi Penting" : "Pembayaran Langganan"}
+                {step === "disclaimer" && "Informasi Penting"}
+                {step === "invoice" && "Pembayaran Langganan"}
+                {step === "success" && "Pembayaran Berhasil"}
               </h2>
               <button
                 onClick={onClose}
@@ -97,7 +101,7 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
             </div>
 
             {/* Content */}
-            {step === "disclaimer" ? (
+            {step === "disclaimer" && (
               <div className="p-6">
                 {/* Warning Icon */}
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
@@ -140,31 +144,84 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
                   </button>
                 </div>
               </div>
-            ) : (
-              <div className="relative h-[500px] w-full sm:h-[600px]">
-                {isLoading ? (
-                  <div className="flex h-full flex-col items-center justify-center gap-3 text-gray-500">
-                    <Loader2 size={32} className="animate-spin text-gold" />
-                    <p className="text-sm">Memuat halaman pembayaran...</p>
-                  </div>
-                ) : invoiceUrl ? (
-                  <iframe
-                    src={invoiceUrl}
-                    className="h-full w-full border-0"
-                    title="Xendit Invoice"
-                    allow="payment"
-                  />
-                ) : (
-                  <div className="flex h-full flex-col items-center justify-center gap-3 text-gray-500">
-                    <p className="text-sm">Gagal memuat halaman pembayaran</p>
+            )}
+
+            {step === "invoice" && (
+              <div className="flex flex-col">
+                <div className="relative h-[450px] w-full sm:h-[520px]">
+                  {isLoading ? (
+                    <div className="flex h-full flex-col items-center justify-center gap-3 text-gray-500">
+                      <Loader2 size={32} className="animate-spin text-gold" />
+                      <p className="text-sm">Memuat halaman pembayaran...</p>
+                    </div>
+                  ) : invoiceUrl ? (
+                    <iframe
+                      src={invoiceUrl}
+                      className="h-full w-full border-0"
+                      title="Xendit Invoice"
+                      allow="payment"
+                    />
+                  ) : (
+                    <div className="flex h-full flex-col items-center justify-center gap-3 text-gray-500">
+                      <p className="text-sm">Gagal memuat halaman pembayaran</p>
+                      <button
+                        onClick={onClose}
+                        className="rounded-lg bg-gold px-4 py-2 text-sm font-medium text-white hover:bg-gold-dark"
+                      >
+                        Tutup
+                      </button>
+                    </div>
+                  )}
+                </div>
+                {/* Button after payment */}
+                {invoiceUrl && !isLoading && (
+                  <div className="border-t border-gray-100 px-6 py-4">
                     <button
-                      onClick={onClose}
-                      className="rounded-lg bg-gold px-4 py-2 text-sm font-medium text-white hover:bg-gold-dark"
+                      onClick={() => setStep("success")}
+                      className="w-full rounded-lg bg-green-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-colors hover:bg-green-700"
                     >
-                      Tutup
+                      Saya Sudah Bayar
                     </button>
                   </div>
                 )}
+              </div>
+            )}
+
+            {step === "success" && (
+              <div className="p-6">
+                {/* Success Icon */}
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                  <CheckCircle size={32} className="text-green-600" />
+                </div>
+
+                {/* Title */}
+                <h3 className="mb-3 text-center text-xl font-bold text-gray-900">
+                  Terima Kasih!
+                </h3>
+
+                {/* Description */}
+                <div className="mb-6 space-y-3 text-center text-gray-600">
+                  <p>
+                    Pembayaran Anda telah <span className="font-semibold text-green-600">berhasil diproses</span>.
+                  </p>
+                  <p>
+                    Namun perlu diingat, ini adalah <span className="font-semibold text-amber-600">halaman demo</span>.
+                    Subscription ini <span className="font-semibold">tidak membuat akun yang sebenarnya</span>.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Ini hanya dummy test untuk keperluan pengembangan menggunakan Xendit mode sandbox.
+                  </p>
+                </div>
+
+                {/* Action */}
+                <div className="flex justify-center">
+                  <button
+                    onClick={onClose}
+                    className="rounded-lg bg-gold px-8 py-2.5 text-sm font-bold text-white shadow-lg shadow-gold/25 transition-colors hover:bg-gold-dark"
+                  >
+                    Tutup
+                  </button>
+                </div>
               </div>
             )}
           </motion.div>

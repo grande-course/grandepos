@@ -21,7 +21,7 @@ export async function POST() {
     },
     body: JSON.stringify({
       external_id: externalId,
-      amount: 100000,
+      amount: 2000000,
       description: "Langganan Grande POS - 1 Bulan",
       currency: "IDR",
       invoice_duration: 86400,
