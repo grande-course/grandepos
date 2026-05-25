@@ -38,5 +38,8 @@ export async function POST() {
 
   const invoice = await response.json();
 
-  return NextResponse.json({ invoice_url: invoice.invoice_url });
+  return NextResponse.json({
+    invoice_url: invoice.invoice_url,
+    invoice_id: invoice.id
+  });
 }

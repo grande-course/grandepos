@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, AlertTriangle, Loader2, CheckCircle } from "lucide-react";
 
@@ -11,19 +11,63 @@ interface SubscribeModalProps {
 
 type Step = "disclaimer" | "invoice" | "success";
 
+const POLLING_INTERVAL = 3000; // 3 seconds
+
 export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps) {
   const [step, setStep] = useState<Step>("disclaimer");
   const [isLoading, setIsLoading] = useState(false);
   const [invoiceUrl, setInvoiceUrl] = useState<string | null>(null);
+  const [invoiceId, setInvoiceId] = useState<string | null>(null);
+  const pollingRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reset state when modal closes
   useEffect(() => {
     if (!isOpen) {
       setStep("disclaimer");
       setInvoiceUrl(null);
+      setInvoiceId(null);
       setIsLoading(false);
+      // Clear polling
+      if (pollingRef.current) {
+        clearInterval(pollingRef.current);
+        pollingRef.current = null;
+      }
     }
   }, [isOpen]);
+
+  // Polling for payment status
+  useEffect(() => {
+    if (step === "invoice" && invoiceId && !isLoading) {
+      const checkStatus = async () => {
+        try {
+          const res = await fetch(`/api/xendit/status?id=${invoiceId}`);
+          const data = await res.json();
+
+          if (data.status === "PAID" || data.status === "SETTLED") {
+            // Payment successful!
+            if (pollingRef.current) {
+              clearInterval(pollingRef.current);
+              pollingRef.current = null;
+            }
+            setStep("success");
+          }
+        } catch {
+          // Silently fail, will retry on next poll
+        }
+      };
+
+      // Start polling
+      pollingRef.current = setInterval(checkStatus, POLLING_INTERVAL);
+
+      // Cleanup
+      return () => {
+        if (pollingRef.current) {
+          clearInterval(pollingRef.current);
+          pollingRef.current = null;
+        }
+      };
+    }
+  }, [step, invoiceId, isLoading]);
 
   // Close on escape key
   useEffect(() => {
@@ -50,13 +94,16 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
       const res = await fetch("/api/xendit/invoice", { method: "POST" });
       const data = await res.json();
 
-      if (data.invoice_url) {
+      if (data.invoice_url && data.invoice_id) {
         setInvoiceUrl(data.invoice_url);
+        setInvoiceId(data.invoice_id);
       } else {
         setInvoiceUrl(null);
+        setInvoiceId(null);
       }
     } catch {
       setInvoiceUrl(null);
+      setInvoiceId(null);
     } finally {
       setIsLoading(false);
     }
@@ -173,15 +220,11 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
                     </div>
                   )}
                 </div>
-                {/* Button after payment */}
+                {/* Status indicator */}
                 {invoiceUrl && !isLoading && (
-                  <div className="border-t border-gray-100 px-6 py-4">
-                    <button
-                      onClick={() => setStep("success")}
-                      className="w-full rounded-lg bg-green-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-colors hover:bg-green-700"
-                    >
-                      Saya Sudah Bayar
-                    </button>
+                  <div className="flex items-center justify-center gap-2 border-t border-gray-100 px-6 py-3 text-sm text-gray-500">
+                    <Loader2 size={16} className="animate-spin" />
+                    <span>Menunggu pembayaran...</span>
                   </div>
                 )}
               </div>
